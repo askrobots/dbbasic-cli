@@ -126,10 +126,10 @@ views:
 """)
         progress.advance(task)
 
-        # Create minimal working engine if needed
+        # The data service is what we need
         progress.update(task, description="Finalizing installation...")
-        crud_engine = core_dir / "dbbasic_crud_engine.py"
-        if not crud_engine.exists():
+        data_service = core_dir / "dbbasic_crud_engine.py"
+        if not data_service.exists():
             # Create a minimal working CRUD engine
             crud_engine.write_text('''
 """

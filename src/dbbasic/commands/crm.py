@@ -53,33 +53,33 @@ project:
 models:
   - contacts:
       fields:
-        - name: string required
-        - email: email unique
-        - phone: string
-        - company: string
-        - status: enum[lead,prospect,customer,inactive]
-        - value: decimal
-        - notes: text
+        - {{name: name, type: string, required: true}}
+        - {{name: email, type: email, unique: true}}
+        - {{name: phone, type: string}}
+        - {{name: company, type: string}}
+        - {{name: status, type: enum, values: [lead, prospect, customer, inactive]}}
+        - {{name: value, type: decimal}}
+        - {{name: notes, type: text}}
   
   - deals:
       fields:
-        - title: string required
-        - contact_id: reference[contacts]
-        - amount: decimal
-        - stage: enum[discovery,proposal,negotiation,closed_won,closed_lost]
-        - probability: integer
-        - close_date: date
-        - notes: text
-  
+        - {{name: title, type: string, required: true}}
+        - {{name: contact_id, type: reference, model: contacts}}
+        - {{name: amount, type: decimal}}
+        - {{name: stage, type: enum, values: [discovery, proposal, negotiation, closed_won, closed_lost]}}
+        - {{name: probability, type: integer}}
+        - {{name: close_date, type: date}}
+        - {{name: notes, type: text}}
+
   - activities:
       fields:
-        - type: enum[call,email,meeting,task]
-        - subject: string required
-        - contact_id: reference[contacts]
-        - deal_id: reference[deals]
-        - due_date: datetime
-        - completed: boolean
-        - notes: text
+        - {{name: type, type: enum, values: [call, email, meeting, task]}}
+        - {{name: subject, type: string, required: true}}
+        - {{name: contact_id, type: reference, model: contacts}}
+        - {{name: deal_id, type: reference, model: deals}}
+        - {{name: due_date, type: datetime}}
+        - {{name: completed, type: boolean}}
+        - {{name: notes, type: text}}
 
 views:
   - dashboard:
@@ -141,10 +141,17 @@ DBBasic CRM - Quick Start
 """
 
 import sys
-import os
-sys.path.insert(0, '{dbbasic_dir}')
+from pathlib import Path
 
-from dbbasic_crud_engine import create_app
+# Try to use local engine first, fall back to installed
+try:
+    # Use the bundled engine
+    from dbbasic.engine import create_app
+except ImportError:
+    # Fall back to DBBasic core
+    sys.path.insert(0, '{dbbasic_dir}')
+    from dbbasic_crud_engine import create_app
+
 import uvicorn
 
 if __name__ == "__main__":
