@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dbbasic-cli"
-version = "0.1.0"
+version = "0.1.1"
 description = "The crate engine for web apps - instant apps with zero config"
 authors = [{name = "DBBasic Contributors"}]
 license = {text = "MIT"}

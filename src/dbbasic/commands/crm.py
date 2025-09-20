@@ -9,6 +9,7 @@ import shutil
 import subprocess
 
 from .config import DBBASIC_DIR
+from ..bootstrap import ensure_dbbasic
 
 console = Console()
 
@@ -17,7 +18,10 @@ def create_crm(
     port: int = typer.Option(8000, "--port", "-p", help="Port to run on")
 ):
     """Create instant CRM application with contacts, deals, and pipeline"""
-    
+
+    # Ensure DBBasic is installed
+    dbbasic_dir = ensure_dbbasic()
+
     start_time = time.time()
     
     with Progress(
@@ -138,7 +142,7 @@ DBBasic CRM - Quick Start
 
 import sys
 import os
-sys.path.insert(0, '{DBBASIC_DIR}')
+sys.path.insert(0, '{dbbasic_dir}')
 
 from dbbasic_crud_engine import create_app
 import uvicorn

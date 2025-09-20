@@ -3,9 +3,10 @@ Service configuration and registry
 """
 
 from pathlib import Path
+from ..bootstrap import get_dbbasic_dir
 
-# Base directory for DBBasic
-DBBASIC_DIR = Path("/Users/danq/websheet/dbbasic")
+# Base directory for DBBasic (auto-installs if needed)
+DBBASIC_DIR = get_dbbasic_dir()
 
 # Service registry
 SERVICES = {
