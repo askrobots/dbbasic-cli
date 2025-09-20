@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dbbasic-cli"
+version = "0.1.0"
+description = "The crate engine for web apps - instant apps with zero config"
+authors = [{name = "DBBasic Contributors"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["web", "framework", "cli", "database", "duckdb", "fastapi"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+]
+
+dependencies = [
+    "typer[all]>=0.9.0",
+    "rich>=13.0.0",
+    "duckdb>=0.9.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.24.0",
+    "pyyaml>=6.0",
+    "psutil>=5.9.0",
+    "httpx>=0.25.0",
+    "click>=8.0.0",
+    "pystructui>=0.1.0",  # Our own package!
+]
+
+[project.urls]
+Homepage = "https://github.com/askrobots/dbbasic"
+Documentation = "https://dbbasic.io"
+Repository = "https://github.com/askrobots/dbbasic-cli"
+
+[project.scripts]
+dbbasic = "dbbasic.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+dbbasic = ["templates/**/*"]
